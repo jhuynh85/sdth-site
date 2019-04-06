@@ -1,4 +1,6 @@
 module.exports = {
+  preset: "jest-puppeteer",
+  testRegex: "./*\\.visualtest\\.js$",
   globals: {
     __PATH_PREFIX__: "",
   },
@@ -16,15 +18,6 @@ module.exports = {
   setupFiles: [
     "<rootDir>/test-env/loadershim.js",
   ],
-  setupFilesAfterEnv: [
-    "<rootDir>/test-env/setup-test-env.js",
-  ],
-  testPathIgnorePatterns: [
-    "/node_modules/",
-    "<rootDir>/.cache/",
-    "<rootDir>/public/",
-  ],
-  testURL: "http://localhost",
   transform: {
     "^.+\\.jsx?$": "<rootDir>/test-env/jest-preprocess.js",
   },

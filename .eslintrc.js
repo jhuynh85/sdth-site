@@ -46,6 +46,8 @@ module.exports = {
   },
   globals: {
     alert: "readonly",
+    browse: 1,
+    context: 1,
     document: "readonly",
     fetch: "readonly",
     FormData: "readonly",
@@ -54,6 +56,7 @@ module.exports = {
     location: "readonly",
     navigator: "readonly",
     Notification: "readonly",
+    page: 1,
     window: "readonly",
     __PATH_PREFIX__: true,
   },

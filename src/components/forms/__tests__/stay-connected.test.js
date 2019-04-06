@@ -1,3 +1,8 @@
+/**
+ * Set testEnvironment manually for non-visual regression tests
+ * @jest-environment jsdom
+ */
+
 import React from "react"
 import { fireEvent, render } from "react-testing-library"
 import { toast as MockToast } from "react-toastify"
@@ -7,12 +12,12 @@ import {
   faFacebookSquare,
   faLinkedin,
   faSlack,
-  faTwitterSquare
+  faTwitterSquare,
 } from "@fortawesome/free-brands-svg-icons"
 import {
   MOCK_INVALID_EMAIL,
   asyncEvent,
-  fillInput
+  fillInput,
 } from "Test/utils"
 import StayConnected from "../stay-connected"
 
@@ -20,19 +25,19 @@ library.add(
   faFacebookSquare,
   faLinkedin,
   faSlack,
-  faTwitterSquare
+  faTwitterSquare,
 )
 
 jest.mock("gatsby-plugin-mailchimp", () => {
   return jest.fn(email => {
     const success = {
       result: "success",
-      msg: "Thanks for subscribing!"
+      msg: "Thanks for subscribing!",
     }
 
     const error = {
       result: "error",
-      msg: "Something went wrong. 😢"
+      msg: "Something went wrong. 😢",
     }
 
     const response = email === MOCK_INVALID_EMAIL
@@ -47,8 +52,8 @@ jest.mock("react-toastify", () => ({
   ToastContainer: jest.fn(() => null),
   toast: {
     success: jest.fn(),
-    error: jest.fn()
-  }
+    error: jest.fn(),
+  },
 }))
 
 afterEach(jest.clearAllMocks)
@@ -69,14 +74,9 @@ function renderStayConnected() {
     email,
     comments,
     subscribe,
-    getByTestId
+    getByTestId,
   }
 }
-
-test("matches its snapshot", () => {
-  const { getByTestId } = render(<StayConnected />)
-  expect(getByTestId("stay-connected")).toMatchSnapshot()
-})
 
 describe("Validation:", () => {
   test("prevents form submission unless name and email are valid", () => {
@@ -84,7 +84,7 @@ describe("Validation:", () => {
       username,
       email,
       comments,
-      subscribe
+      subscribe,
     } = renderStayConnected()
 
     // does NOT submit if name is empty
@@ -109,8 +109,8 @@ describe("Validation:", () => {
     expect(MockAddToMailchimp).toHaveBeenCalledWith(
       "has@symbol", {
         NAME: "Name",
-        COMMENTS: ""
-      }
+        COMMENTS: "",
+      },
     )
   })
 
@@ -119,7 +119,7 @@ describe("Validation:", () => {
       username,
       email,
       subscribe,
-      getByTestId
+      getByTestId,
     } = renderStayConnected()
 
     const expectError = (field) => {
@@ -129,7 +129,6 @@ describe("Validation:", () => {
     const expectNoError = (field) => {
       expect(getByTestId(`${field}-error`)).toBeEmpty()
     }
-
 
     // errors are NOT displayed initially
     expectNoError("username")
@@ -161,7 +160,7 @@ describe("Submission results:", () => {
     const {
       username,
       email,
-      subscribe
+      subscribe,
     } = renderStayConnected()
 
     fillInput(username, "Name")
@@ -177,7 +176,7 @@ describe("Submission results:", () => {
     const {
       username,
       email,
-      subscribe
+      subscribe,
     } = renderStayConnected()
 
     fillInput(username, "Name")
@@ -203,7 +202,7 @@ describe("Submission results:", () => {
     const {
       username,
       email,
-      subscribe
+      subscribe,
     } = renderStayConnected()
 
     fillInput(username, "Name")

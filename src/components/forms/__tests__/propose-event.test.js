@@ -1,3 +1,8 @@
+/**
+ * Set testEnvironment manually for non-visual regression tests
+ * @jest-environment jsdom
+ */
+
 import React from "react"
 import { fireEvent, render } from "react-testing-library"
 import { toast as MockToast } from "react-toastify"
